@@ -1,8 +1,10 @@
-hopsAPI
+ShopsAPI
 
-Deploy the ShopsAPI.war in the Application server of host and then use the localhost and 8090 in the below given URI’s and test the all the operation in postman.
+Please read below instructions to use API.
 
-To create the shop use below format  
+##Deploy the ShopsAPI.war in the Application server of host and then use the localhost and 8090 in the below given URI’s and test the all the operation in postman.
+
+##To create the shop use below format  
 URI: http://localhost:8090/shopapi/shops
 Method: POST
 Headers: 
@@ -20,7 +22,7 @@ Select raw type and use below json format.
   "shopPincode": "461335"
   }
 
-To update the shop 
+##To update the shop 
 To update the shop’s address we should know shop Id first
 If Shop name already exist it will return shop ID , then pass the shop ID in uri and new address in json as below,
 URI: http://localhost:8090/shopapi/shops/<shopId>
@@ -40,7 +42,7 @@ Select raw type and use below json format.
   "shopPincode": "411057"
   }
 
-URI table for all services
+## URI table for all services
 Operation:
 Method:
 URI:
