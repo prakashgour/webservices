@@ -25,7 +25,13 @@ import com.prakash.shopapi.io.service.ShopService;
 import com.prakash.shopapi.io.utils.MapUtil;
 import com.prakash.shopapi.io.utils.GoogleApiUtils; 
 
-
+/**
+ * 
+ * @author Prakash Gour
+ * @since  01-05-2017
+ * @version
+ *
+ */
 @RestController
 @RequestMapping("/shopapi")
 public class ShopController {
@@ -34,12 +40,23 @@ public class ShopController {
 	@Autowired
 	private ShopService shopService;
 
+	/**
+	 * Get All Shops
+	 * 
+	 * @return List<Shop> - List of shops
+	 */
 	@RequestMapping("/shops")
 	public List<Shop> getAll() {
 		log.info("Request is GET /shops");
 		return shopService.getAllShops();
 	}
 
+	/**
+	 * Get Shop by shopId
+	 * 
+	 * @param shopId - Id of shop which we want to get. 
+	 * @return Shop - Shop
+	 */
 	@RequestMapping(value = "/shops/{shopId}", method = RequestMethod.GET)
 	public ResponseEntity<Shop> getShopById(@PathVariable long shopId) {
 		Shop shop = shopService.getShop(shopId);
@@ -51,6 +68,13 @@ public class ShopController {
 		}
 	}
 
+	/**
+	 * Creating a new shop
+	 * 
+	 * @param shop - shop details provided by user
+	 * @param ucb
+	 * @return ResponseEntity<?> - Response with the status and headers value
+	 */
 	@RequestMapping(value = "/shops", method = RequestMethod.POST)
 	public ResponseEntity<?> createShop(@RequestBody Shop shop, UriComponentsBuilder ucb) {
 		log.info("Request is POST /shops");
@@ -83,6 +107,13 @@ public class ShopController {
 
 	}
 
+	/**
+	 * Search shop by latitude and longitude
+	 * 
+	 * @param longitude - longitude provided by user
+	 * @param latitude - latitude provided by user
+	 * @return ResponseEntity<?> - Response with the searched shop and headers value
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ResponseEntity<?> searchShop(@QueryParam("longitude") double longitude,
 			@QueryParam("latitude") double latitude) {
@@ -98,17 +129,43 @@ public class ShopController {
 		}
 	}
 
+	/** 
+	 * Update the shop details of given shopId
+	 * 
+	 * @param shop - updated shop details
+	 * @param shopId - shop id
+	 * @param ucb - UriComponentsBuilder
+	 * @return ResponseEntity<?> - Response with the status and headers value
+	 */
 	@RequestMapping(value = "/shops/{shopId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateShop(@RequestBody Shop shop, @PathVariable long shopId, UriComponentsBuilder ucb) {
 		log.info("Request is PUT /shops/{" + shopId + "}");
-		Shop shop1 = shopService.getShop(shopId);
-		shop1.setShopCity(shop.getShopCity());
-		shop1.setShopCountry(shop.getShopCountry());
-		shop1.setShopStreet(shop.getShopStreet());
-		shop1.setShopPincode(shop.getShopPincode());
-		shop1.setShopDistrict(shop.getShopDistrict());
-		shop1.setShopState(shop.getShopState());
-		shopService.updateShop(shop1);
+		Shop oldShop = shopService.getShop(shopId);
+		
+		// if address changed
+		if(GoogleApiUtils.isAddressUpdated(shop, oldShop)) {
+			oldShop.setShopCity(shop.getShopCity());
+			oldShop.setShopCountry(shop.getShopCountry());
+			oldShop.setShopStreet(shop.getShopStreet());
+			oldShop.setShopPincode(shop.getShopPincode());
+			oldShop.setShopDistrict(shop.getShopDistrict());
+			oldShop.setShopState(shop.getShopState());
+			oldShop.setShopName(shop.getShopName());
+			
+			LatLng latLng = GoogleApiUtils.getLatLng(GoogleApiUtils.getAddressString(oldShop));
+			
+			if(latLng == null) {
+				return new ResponseEntity<>("Please enter correct address ", HttpStatus.BAD_REQUEST);
+			}
+			
+			oldShop.setLatitude(latLng.lat);
+			oldShop.setLongitude(latLng.lng);
+		} else {
+			oldShop.setShopName(shop.getShopName());
+		}
+		
+		
+		shopService.updateShop(oldShop);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("content-type", "application/json");
@@ -116,6 +173,7 @@ public class ShopController {
 		return new ResponseEntity<>(headers, HttpStatus.OK);
 	}
 
+	
 	@RequestMapping(value = "/shops/{shopId}", method = RequestMethod.DELETE)
 	public String deleteShop(@PathVariable long shopId) {
 		log.info("Request is DELETE /shops/{" + shopId + "}");
@@ -123,6 +181,17 @@ public class ShopController {
 		return "Shop with id " + shopId + " has been deleted successfully.";
 	}
 	
+	/**
+	 * Search nearest shop by address .
+	 * 
+	 * @param city
+	 * @param street
+	 * @param dist
+	 * @param state
+	 * @param country
+	 * @param pin
+	 * @return
+	 */
 	@RequestMapping(value = "/searchNearest", method = RequestMethod.GET)
 	public ResponseEntity<Shop> searchNearestShop(@QueryParam("city") String city, @QueryParam("street") String street, @QueryParam("dist") String dist,
 			@QueryParam("state") String state, @QueryParam("country") String country, @QueryParam("pin") String pin) {
