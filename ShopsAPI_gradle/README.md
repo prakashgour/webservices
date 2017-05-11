@@ -10,7 +10,7 @@ Method: POST
 Headers: 
 1. content-type=application\json
 Body:
-Select raw type and use below json format.
+Select raw type and use below json format(example).
 
 {
   "shopName": "XYZ Cloths Store",
@@ -25,13 +25,15 @@ Select raw type and use below json format.
 ##To update the shop 
 To update the shop’s address we should know shop Id first
 If Shop name already exist it will return shop ID , then pass the shop ID in uri and new address in json as below,
+
 URI: http://localhost:8090/shopapi/shops/<shopId>
 Method: PUT
 Headers: 
 1. content-type=application\json
 Body:
-Select raw type and use below json format.
+Select raw type and use below json format (example id=2).
 
+URI: http://localhost:8090/shopapi/shops/2
 {
   "shopName": " XYZ Cloths Store",
   "shopStreet": "Pune ",
