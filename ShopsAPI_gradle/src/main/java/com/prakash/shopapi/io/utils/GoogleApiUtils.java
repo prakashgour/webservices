@@ -14,35 +14,41 @@ import com.google.maps.model.LatLng;
 import com.prakash.shopapi.io.constants.ShopAPIConstants;
 import com.prakash.shopapi.io.model.Shop;
 
+
+/**
+ * @author Prakash Gour
+ * Since MAY, 2017
+ */
 public class GoogleApiUtils {
 	private static GeoApiContext geoApiContext = null;
 
 	private static final Logger log = LoggerFactory.getLogger(GoogleApiUtils.class);
 
+	
 	public static LatLng getLatLng(String addrString) {
 		GeoApiContext geoApiContext = GoogleApiUtils.getGeoApiContext();
 
 		GeocodingResult geocodingResult = null;
 		GeocodingApiRequest apiRequest = GeocodingApi.geocode(geoApiContext, addrString);
 		try {
-			GeocodingResult []geo = apiRequest.await();
+			GeocodingResult[] geo = apiRequest.await();
 			System.out.println(geo.length);
-			if(geo.length > 0) {
-				geocodingResult = geo[0];	
+			if (geo.length > 0) {
+				geocodingResult = geo[0];
 			}
-			
+
 		} catch (ApiException | InterruptedException | IOException e) {
 			e.printStackTrace();
 			log.error(e.getMessage());
 
 		}
 
-		if(geocodingResult !=null) {
-			return geocodingResult.geometry.location;	
+		if (geocodingResult != null) {
+			return geocodingResult.geometry.location;
 		} else {
 			return null;
 		}
-		
+
 	}
 
 	public static String getAddressString(Shop shop) {
@@ -96,5 +102,25 @@ public class GoogleApiUtils {
 	/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
 	private static double rad2deg(double rad) {
 		return (rad * 180 / Math.PI);
+	}
+
+	public static boolean isAddressUpdated(Shop newShop, Shop oldShop) {
+		boolean isAddressChanged = false;
+
+		if (!newShop.getShopCity().equals(oldShop.getShopCity())) {
+			isAddressChanged = true;
+		} else if (!newShop.getShopStreet().equals(oldShop.getShopStreet())) {
+			isAddressChanged = true;
+		} else if (!newShop.getShopState().equals(oldShop.getShopState())) {
+			isAddressChanged = true;
+		} else if (!newShop.getShopDistrict().equals(oldShop.getShopDistrict())) {
+			isAddressChanged = true;
+		} else if (!newShop.getShopCountry().equals(oldShop.getShopCountry())) {
+			isAddressChanged = true;
+		} else if (!newShop.getShopPincode().equals(oldShop.getShopPincode())) {
+			isAddressChanged = true;
+		}
+
+		return isAddressChanged;
 	}
 }
