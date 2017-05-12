@@ -11,12 +11,24 @@ import org.springframework.stereotype.Service;
 import com.prakash.shopapi.io.model.Shop;
 import com.prakash.shopapi.io.repository.ShopRepository;
 
+/**
+ * @author Prakash Gour
+ * Since MAY, 2017
+ */
 @Service
 public class ShopServiceImpl implements ShopService {
 	private static final Logger log = LoggerFactory.getLogger(ShopServiceImpl.class);
 
 	@Autowired
 	private ShopRepository shopRepository;
+
+	public ShopRepository getShopRepository() {
+		return shopRepository;
+	}
+
+	public void setShopRepository(ShopRepository shopRepository) {
+		this.shopRepository = shopRepository;
+	}
 
 	public List<Shop> getAllShops() {
 		List<Shop> shops = new ArrayList<>();
