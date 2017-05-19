@@ -32,6 +32,7 @@ dependencies {
 	compile('org.json:json')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-jersey')
+	compile('org.springframework.boot:spring-boot-starter-aop')
 }
 
 
