@@ -1,10 +1,10 @@
-ShopsAPI
+#ShopsAPI
 
 Please read below instructions to use API.
 
-##Deploy the ShopsAPI.war in the Application server of host and then use the localhost and 8090 in the below given URI’s and test the all the operation in postman.
+##Deploy the ShopsAPI.war in the Application server of host and then use the localhost and 8090 in the below given URI and test the all the operation in postman.
 
-##To create the shop use below format  
+##To create a shop follow below steps.
 URI: http://localhost:8090/shopapi/shops
 Method: POST
 Headers: 
@@ -13,17 +13,37 @@ Body:
 Select raw type and use below json format(example).
 
 {
-  "shopName": "XYZ Cloths Store",
-  "shopStreet": "Harda 2",
-  "shopCity": "Harda",
-  "shopDistrict": "Harda",
+  "shopName": "Agrawal Sweets",
+  "shopStreet": "MG Road",
+  "shopCity": "Indore",
+  "shopDistrict": "Indore",
   "shopState": "Madhya Pradesh",
   "shopCountry": "India",
-  "shopPincode": "461335"
+  "shopPincode": "452001"
+  }
+#Test custom exception 
+If you do not provide all the details (i.e. remove any pair from above example) REST will respond custom exception.
+
+##To update the address of a shop follow below steps. 
+
+URI: http://localhost:8090/shopapi/shops
+Method: POST
+Headers: 
+1. content-type=application\json
+Body:
+Select raw type and use below json format and provide updated data (example).
+
+{
+  "shopName": "Agrawal Sweets",
+  "shopStreet": "RNT Marg",
+  "shopCity": "Indore",
+  "shopDistrict": "Indore",
+  "shopState": "Madhya Pradesh",
+  "shopCountry": "India",
+  "shopPincode": "452001"
   }
 
-##To update the shop 
-To update the shop’s address we should know shop Id first
+##To update the shop address with shop Id (When there is no change in address REST respond you with shop ID and Lat Long)
 If Shop name already exist it will return shop ID , then pass the shop ID in uri and new address in json as below,
 
 URI: http://localhost:8090/shopapi/shops/<shopId>
@@ -35,7 +55,7 @@ Select raw type and use below json format (example id=2).
 
 URI: http://localhost:8090/shopapi/shops/2
 {
-  "shopName": " XYZ Cloths Store",
+  "shopName": "Agrawal Sweets",
   "shopStreet": "Pune ",
   "shopCity": "Pune",
   "shopDistrict": "Pune",
@@ -44,39 +64,25 @@ URI: http://localhost:8090/shopapi/shops/2
   "shopPincode": "411057"
   }
 
-## URI table for all services
-Operation:
-Method:
-URI:
 
-Add new Shop
-POST
-http://localhost:8090/shopapi/shops
+## Find nearest shop from current location of user.
+Method :GET
+URI : http://localhost:8090/shopapi/searchNearest?street=<>&city=<>&country=<>&state=<>&dist=<>&pin=<>
 
-2 Get all shops
-GET
-http://localhost:8090/shopapi/shops
+##Get all shops from DB.
+Method:GET
+URI: http://localhost:8090/shopapi/shops
 
-3 Get Shop by Shop Id
+#URIs for other services.
+
+
+##Get Shop by Shop Id
 GET
 http://localhost:8090/shopapi/shops/{shopId}
 
-4 Search Shop by Shop Name
-GET
-http://localhost:8090/shopapi/shops?shopName=<shop_name>
 
-5 Update the shop details
-PUT
-http://localhost:8090/shopapi/shops/{shopId}
-
-6 Delete Shop
-DELETE
-http://localhost:8090/shopapi/shops/{shopId}
-
-7 Search shop at given longitude and latitude
-GET
+##Search shop at given longitude and latitude
+Method :GET
 http://localhost:8090/shopapi/search?longitude=<longitude >&latitude=<latitude>
 
-8 Find nearest shop to given address
-GET
-http://localhost:8090/shopapi/searchNearest?street=<>&city=<>&country=<>&state=<>&dist=<>&pin=<>
+
