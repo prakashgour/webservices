@@ -14,17 +14,18 @@ import com.google.maps.model.LatLng;
 import com.prakash.shopapi.io.constants.ShopAPIConstants;
 import com.prakash.shopapi.io.model.Shop;
 
-
 /**
+ * This is the Utility class to handle the Google Map Api Request in order to
+ * fulfill the user request.
+ * 
  * @author Prakash Gour
- * Since MAY, 2017
+ * @since Since MAY, 2017
  */
 public class GoogleApiUtils {
 	private static GeoApiContext geoApiContext = null;
 
 	private static final Logger log = LoggerFactory.getLogger(GoogleApiUtils.class);
 
-	
 	public static LatLng getLatLng(String addrString) {
 		GeoApiContext geoApiContext = GoogleApiUtils.getGeoApiContext();
 
@@ -73,7 +74,7 @@ public class GoogleApiUtils {
 		return geoApiContext;
 	}
 
-	// get distance between two latlongs
+	// Get distance between two latlongs
 	public static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
 		double theta = lon1 - lon2;
 		double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2))
@@ -90,16 +91,12 @@ public class GoogleApiUtils {
 		return (dist);
 	}
 
-	/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
-	/* :: This function converts decimal degrees to radians : */
-	/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+	// This function converts decimal degrees to radians
 	private static double deg2rad(double deg) {
 		return (deg * Math.PI / 180.0);
 	}
 
-	/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
-	/* :: This function converts radians to decimal degrees : */
-	/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+	// This function converts radians to decimal degrees
 	private static double rad2deg(double rad) {
 		return (rad * 180 / Math.PI);
 	}
