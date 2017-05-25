@@ -1,7 +1,6 @@
 package com.prakash.shopapi.io.model;
 
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,8 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+/**
+ * This class <Shop.java> provides the shop details.
+ * 
+ * @author Prakash Gour
+ */
 @Entity
-@Table(name = "shop_api")
+@Table(name = "shiop_api")
 public class Shop {
 
 	@Id
@@ -19,8 +23,9 @@ public class Shop {
 	@NotNull
 	@Column(name = "shop_name")
 	private String shopName;
-	@NotNull
+
 	private String shopStreet;
+	@NotNull
 	private String shopCity;
 	private String shopDistrict;
 	@NotNull
