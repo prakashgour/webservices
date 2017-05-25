@@ -22,8 +22,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.google.maps.model.LatLng;
 import com.prakash.shopapi.io.constants.ShopAPIConstants;
-import com.prakash.shopapi.io.NoDataFoundException;
-import com.prakash.shopapi.io.NullValueException;
+import com.prakash.shopapi.io.utils.NoDataFoundException;
+import com.prakash.shopapi.io.utils.NullValueException;
 import com.prakash.shopapi.io.model.Shop;
 import com.prakash.shopapi.io.service.ShopService;
 import com.prakash.shopapi.io.utils.GoogleApiUtils;
