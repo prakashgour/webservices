@@ -15,6 +15,12 @@ import com.prakash.shopapi.io.model.Shop;
 import com.prakash.shopapi.io.repository.ShopRepository;
 import com.prakash.shopapi.io.service.ShopServiceImpl;
 
+/**
+ * This is the test class extending ShopsApiGradleApplicationTests to execute test cases
+ * 
+ * @author Prakash Gour
+ */
+
 public class ShopApiTest extends ShopsApiGradleApplicationTests {
 
 	@Autowired
