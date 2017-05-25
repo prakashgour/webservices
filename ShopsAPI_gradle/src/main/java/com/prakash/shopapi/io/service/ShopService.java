@@ -4,6 +4,13 @@ import java.util.List;
 
 import com.prakash.shopapi.io.model.Shop;
 
+
+/**
+ * This interface <ShopService.java> provides the functions to manage the shop details.
+ * 
+ * @author Prakash Gour
+ *
+ */
 public interface ShopService {
 	public List<Shop> getAllShops();
 
