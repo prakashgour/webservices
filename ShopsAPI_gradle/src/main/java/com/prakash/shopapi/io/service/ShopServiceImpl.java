@@ -12,8 +12,11 @@ import com.prakash.shopapi.io.model.Shop;
 import com.prakash.shopapi.io.repository.ShopRepository;
 
 /**
+ * This class <ShopServiceImpl.java> provides the implementation for ShopService
+ * 
  * @author Prakash Gour
- * Since MAY, 2017
+ * @since Since MAY, 2017
+ * @see {@link com.prakash.shopapi.io.repository.ShopRepository.java}
  */
 @Service
 public class ShopServiceImpl implements ShopService {
