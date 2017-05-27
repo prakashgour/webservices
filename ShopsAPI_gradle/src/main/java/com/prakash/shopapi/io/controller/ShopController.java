@@ -1,6 +1,7 @@
 package com.prakash.shopapi.io.controller;
 
 import java.util.HashMap;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +23,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.google.maps.model.LatLng;
 import com.prakash.shopapi.io.constants.ShopAPIConstants;
-import com.prakash.shopapi.io.utils.NoDataFoundException;
-import com.prakash.shopapi.io.utils.NullValueException;
+import com.prakash.shopapi.io.exception.NoDataFoundException;
+import com.prakash.shopapi.io.exception.NullValueException;
 import com.prakash.shopapi.io.model.Shop;
 import com.prakash.shopapi.io.service.ShopService;
 import com.prakash.shopapi.io.utils.GoogleApiUtils;
