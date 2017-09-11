@@ -2,6 +2,7 @@
 
 Please read below instructions to use API.
 
+
 ##Deploy the ShopsAPI.war in the Application server of host and then use the localhost:8090 in the below given URI and test the all the operation in postman.
 
 ##To create a shop follow below steps.
@@ -85,4 +86,4 @@ http://localhost:8090/shopapi/shops/{shopId}
 Method :GET
 http://localhost:8090/shopapi/search?longitude=<longitude >&latitude=<latitude>
 
-
+=================================================================================================================
