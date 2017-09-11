@@ -10,13 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
 import com.prakash.shopapi.io.model.Shop;
 import com.prakash.shopapi.io.repository.ShopRepository;
 import com.prakash.shopapi.io.service.ShopServiceImpl;
 
 /**
- * This is the test class extending ShopsApiGradleApplicationTests to execute test cases
+ * This is the test cases class extending ShopsApiGradleApplicationTests to execute test cases .
  * 
  * @author Prakash Gour
  */
